@@ -2,6 +2,7 @@ package com.wjx.concurrency;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * CountDownLatch 是共享锁的一种实现,它默认构造 AQS 的 state 值为 count。
@@ -12,8 +13,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * 1. AQS: 当线程请求共享资源时，如果共享资源空闲，则设置当前线程为工作线程，并将共享资源设为锁定；
  * 如果共享资源锁定，需要提供当前线程阻塞且被唤醒时锁分配的机制，这个机制AQS是通过CLH(双向队列)实现的。
+ * 1.1 每一个节点代表一个线程，保存着节点在队列中的状态，线程引用，上一节点，下一节点。
+ * 1.2 线程的阻塞和唤醒机制是通过Unsafe.park和unpark实现的，当有资源release时，会unpark首节点线程(headNode)
+ * 1.3 使用volatile int status 代表同步状态和资源状态，保证可见性
  *
  * 2. CountDownLatch的计算密集型任务可以由CompletedFuture来替换，见TPool
+ *
+ * 3. CountDownLatch
  *
  * @Author wangjiaxing
  * @Date 2023/1/23

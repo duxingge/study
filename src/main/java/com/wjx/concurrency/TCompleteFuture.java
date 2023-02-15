@@ -1,10 +1,15 @@
 package com.wjx.concurrency;
 
+import com.google.common.collect.Lists;
+import com.wjx.util.JsonUtil;
+
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * CompletableFuture 提供了很多对多线程友好的方法，使用它可以很方便地为我们编写多线程程序，什么异步、串行、并行或者等待所有线程执行完任务什么的都非常方便。
@@ -20,7 +25,8 @@ public class TCompleteFuture {
     public static void main(String[] args) {
 //        timeOutTest();
 //        multiThreadTest();
-        blockOtherTaskTest();
+//        blockOtherTaskTest();
+        testMultiThreadException();
     }
 
     private static void blockOtherTaskTest() {
@@ -86,7 +92,7 @@ public class TCompleteFuture {
     }
 
 
-    static void timeOutTest() {
+    static void testGetTimeOutTest() {
         CompletableFuture<String> stringCompletableFuture = CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(200);
@@ -108,5 +114,15 @@ public class TCompleteFuture {
         }
     }
 
+
+    static void testMultiThreadException() {
+        List<Integer> collect = Lists.newArrayList(1, 2, 3, 4, 5).stream().map(task -> CompletableFuture.supplyAsync(() -> {
+            if (task == 2) {
+                throw new RuntimeException();
+            }
+            return task;
+        })).map(c -> c.join()).collect(Collectors.toList());
+        System.out.println(JsonUtil.toString(collect));
+    }
 
 }

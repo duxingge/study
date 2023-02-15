@@ -1,1 +1,12 @@
-动态规划：https://zhuanlan.zhihu.com/p/91582909
+ 注释中加链接@link
+ * 链接:其它包的类 {@link com.zhn.learn_android.other.ClassB }
+ *
+ * 链接:同包的类（可以省略包名） {@link ClassA }
+ * 链接:同包类的成员 {@link ClassA#name }
+ * 链接:同包类的方法 {@link ClassA#print() }
+ *
+ * 链接:同包类的内部类 {@link ClassA.SubClassA }
+ * 链接:同包类的内部类-的成员 {@link ClassA.SubClassA#id }
+ *
+ * 链接:当前类的方法 {@link #test() }
+ * 链接:接口的常量 {@link Constants#CLIENT_TYPE }

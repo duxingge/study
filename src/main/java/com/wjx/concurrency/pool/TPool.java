@@ -1,4 +1,6 @@
-package com.wjx.concurrency;
+package com.wjx.concurrency.pool;
+
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +15,8 @@ import java.util.stream.Collectors;
  * @Author wangjiaxing
  * @Date 2023/1/22
  */
-public class TPool {
-    private ThreadPoolExecutor synPoolExecutor = new ThreadPoolExecutor(10, 10, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(500), Executors.defaultThreadFactory(), new ThreadPoolExecutor.CallerRunsPolicy());
+public abstract class TPool {
+    private ThreadPoolExecutor synPoolExecutor = new ThreadPoolExecutor(10, 10, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(500), getNameThreadFactory("syn-contract",false), new ThreadPoolExecutor.CallerRunsPolicy());
 
 
     private volatile boolean end = true;
@@ -24,6 +26,7 @@ public class TPool {
     private volatile int batch = 1;
     List<String> agreementList = new ArrayList<>();
 
+    // 优化1： 可以使用 CompletableFuture 类来改进！Java8 的 CompletableFuture 提供了很多对多线程友好的方法，使用它可以很方便地为我们编写多线程程序，什么异步、串行、并行或者等待所有线程执行完任务什么的都非常方便。
     public synchronized void doTask() {
         //同步数据
         while (!end) {
@@ -54,7 +57,7 @@ public class TPool {
         System.out.println("task down");
     }
 
-    // 优化1： 可以使用 CompletableFuture 类来改进！Java8 的 CompletableFuture 提供了很多对多线程友好的方法，使用它可以很方便地为我们编写多线程程序，什么异步、串行、并行或者等待所有线程执行完任务什么的都非常方便。
+
     public synchronized void doTask2() {
         //同步数据
         while (!end) {
@@ -86,5 +89,12 @@ public class TPool {
         //init batch data
     }
 
-
+    // named for thread with ThreadFactory
+    public static ThreadFactory getNameThreadFactory(String threadNamePrefix, boolean daemon) {
+        ThreadFactory threadFactory = new ThreadFactoryBuilder()
+                .setNameFormat(threadNamePrefix + "-%d")
+                .setDaemon(daemon)
+                .build();
+        return threadFactory;
+    }
 }
