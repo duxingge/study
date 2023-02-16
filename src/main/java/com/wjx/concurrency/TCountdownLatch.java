@@ -17,7 +17,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 1.2 线程的阻塞和唤醒机制是通过Unsafe.park和unpark实现的，当有资源release时，会unpark首节点线程(headNode)
  * 1.3 使用volatile int status 代表同步状态和资源状态，保证可见性
  *
- * 2. CountDownLatch的计算密集型任务可以由CompletedFuture来替换，见TPool
+ * 2. CountDownLatch的计算密集型任务可以由CompletedFuture来替换，见{@link com.wjx.concurrency.pool.TPool}
  *
  * 3. CountDownLatch
  *

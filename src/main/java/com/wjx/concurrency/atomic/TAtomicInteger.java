@@ -14,24 +14,24 @@ import java.util.function.Function;
  * 2。CAS具有ABA问题需要注意
  *
  * 3.1 基本类型原子类：
- * AtomicInteger
- * AtomicLong
- * AtomicBoolean
+ * {@link java.util.concurrent.atomic.AtomicInteger}
+ * {@link java.util.concurrent.atomic.AtomicLong}
+ * {@link java.util.concurrent.atomic.AtomicBoolean}
  *
  * 3.2 数组型原子类：用法基本类似基本类型原子类
- * AtomicIntegerArray
- * AtomicLongArray
- * AtomicReferenceArray
+ * {@link java.util.concurrent.atomic.AtomicIntegerArray}
+ * {@link java.util.concurrent.atomic.AtomicLongArray}
+ * {@link java.util.concurrent.atomic.AtomicReferenceArray}
  *
- * 3.3 引用类型原子类： 可以将引用类型中的一个属性设为版本号，从而解决ABA问题
- * AtomicReference
+ * 3.3 引用类型原子类： 可以将引用类V的一个属性设为版本号，从而解决ABA问题
+ * {@link java.util.concurrent.atomic.AtomicReference} AtomicReference<V>
  *
  * 3.4 对象属性修改原子类:
  *      第一步，因为对象的属性修改类型原子类都是抽象类，所以每次使用都必须使用静态方法 newUpdater()创建一个更新器，并且需要设置想要更新的类和属性。
  *      第二步，更新的对象属性必须使用 public volatile 修饰符。
- * AtomicIntegerFieldUpdater:原子更新整形字段的更新器
- * AtomicLongFieldUpdater：原子更新长整形字段的更新器
- * AtomicReferenceFieldUpdater ：原子更新引用类型里的字段的更新器
+ * {@link java.util.concurrent.atomic.AtomicIntegerFieldUpdater}:原子更新整形字段的更新器
+ * {@link java.util.concurrent.atomic.AtomicLongFieldUpdater}：原子更新长整形字段的更新器
+ * {@link java.util.concurrent.atomic.AtomicReferenceFieldUpdater} ：原子更新引用类型里的字段的更新器
  *
  * @Author wangjiaxing
  * @Date 2023/1/31

@@ -87,8 +87,6 @@ public class TCompleteFuture {
         //等待结果完成/抛出异常（有子结果抛出异常）
         futures.join();
         System.out.println("all done: " + futures.isDone());
-
-
     }
 
 

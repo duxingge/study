@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 线程池动态参数设置和监控
  * @Author wangjiaxing
  * @Date 2023/1/27
  */
@@ -17,7 +18,7 @@ public class TDynamicThreadPool extends TPool {
     }
 
     private static void dynamicThreadBuild() {
-        ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), Runtime.getRuntime().availableProcessors(), 10, TimeUnit.SECONDS, new ResizeableCapacityLinkedBlockingQueue<Runnable>(10), getNameThreadFactory("T-Dynamic-", false));
+        ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(getThreadSize(TaskType.IO_INTENSIVE), getThreadSize(TaskType.IO_INTENSIVE), 10, TimeUnit.SECONDS, new ResizeableCapacityLinkedBlockingQueue<Runnable>(10), getNameThreadFactory("T-Dynamic-", false));
 
         for (int i = 0; i < 15; i++) {
             poolExecutor.submit(new Runnable() {
