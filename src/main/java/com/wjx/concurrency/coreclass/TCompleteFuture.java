@@ -1,4 +1,4 @@
-package com.wjx.concurrency;
+package com.wjx.concurrency.coreclass;
 
 import com.google.common.collect.Lists;
 import com.wjx.util.JsonUtil;

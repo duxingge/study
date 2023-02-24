@@ -1,4 +1,4 @@
-package com.wjx.concurrency;
+package com.wjx.concurrency.coreclass;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,7 +15,9 @@ public class TSemaphore {
     public static void main(String[] args) {
         doTask();
     }
-
+    /**
+     * 实现 最多只有五个线程执行
+     */
     static void doTask() {
         Semaphore semaphore = new Semaphore(5);
         while (true) {

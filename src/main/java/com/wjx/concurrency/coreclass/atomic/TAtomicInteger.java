@@ -1,4 +1,4 @@
-package com.wjx.concurrency.atomic;
+package com.wjx.concurrency.coreclass.atomic;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -70,10 +70,13 @@ public class Windows {
         for (int i = 0; i < (sChars.length - p.length()); i++) {
             int x1 = sChars[i] - 'a';
             int x2 = sChars[i+p.length()] - 'a';
+            //先删去这两种字符的影响
             diff-=minus(xNums[x1],yNums[x1]);
             diff-=minus(xNums[x2],yNums[x2]);
+            //滑动窗口的字符修正
             xNums[x1]--;
             xNums[x2]++;
+            //最后加上这两个字符的影响
             diff+=minus(xNums[x1],yNums[x1]);
             diff+=minus(xNums[x2],yNums[x2]);
             if (diff==0) {

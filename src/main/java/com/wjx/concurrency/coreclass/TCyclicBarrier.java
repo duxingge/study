@@ -1,4 +1,4 @@
-package com.wjx.concurrency;
+package com.wjx.concurrency.coreclass;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
