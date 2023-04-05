@@ -46,7 +46,7 @@ public class ThisEscape {
      */
     @ThreadUnSafe
     public ThisEscape() {
-        //this被新线程隐式的共享
+        //情景1： this被新线程隐式的共享
         new Thread(new Runnable(){
             @Override
             public void run() {
@@ -55,7 +55,7 @@ public class ThisEscape {
             }
         }).start();
 
-        //this被新线程显示的共享,
+        //情景二：this被新线程显示的共享,
         new Thread1(this).start();
     }
 

@@ -2,7 +2,7 @@ package com.wjx.deadlock;
 
 /**
  * 5名哲学家围桌吃饭，需要左右两根筷子才可吃饭，如何实现死锁？又如何避免死锁？
- *
+ * 扩展1：使用jps -l |  jstack PID观察死锁
  * @Author wangjiaxing
  * @Date 2022/9/12
  */
@@ -40,48 +40,48 @@ public class PhilosopherDining {
         }
 
 //        算法1,都先抓右筷子，再抓左筷子，会出现死锁
-//        @Override
-//        public void run() {
-//            synchronized (r) {
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                synchronized (l) {
-//                    System.out.println(id + " 吃完了");
-//                }
-//            }
-//        }
-
-
-//        算法二 出现一个左撇子
         @Override
         public void run() {
-            if(id==0) {   // if(id%2==0) 算法三，偶数左撇子
-                synchronized (l) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    synchronized (r) {
-                        System.out.println(id + " 吃完了");
-                    }
+            synchronized (r) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            }else {
-                synchronized (r) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    synchronized (l) {
-                        System.out.println(id + " 吃完了");
-                    }
+                synchronized (l) {
+                    System.out.println(id + " 吃完了");
                 }
             }
         }
+
+
+////        算法二 出现一个左撇子
+//        @Override
+//        public void run() {
+//            if(id==0) {   // if(id%2==0) 算法三，偶数左撇子
+//                synchronized (l) {
+//                    try {
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    synchronized (r) {
+//                        System.out.println(id + " 吃完了");
+//                    }
+//                }
+//            }else {
+//                synchronized (r) {
+//                    try {
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    synchronized (l) {
+//                        System.out.println(id + " 吃完了");
+//                    }
+//                }
+//            }
+//        }
     }
 
 
