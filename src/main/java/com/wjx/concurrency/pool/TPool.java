@@ -87,6 +87,36 @@ public abstract class TPool {
     private void initBatchData() {
         batch++;
         //init batch data
+
+//        CREATE TABLE `order` (
+//          `id` varchar(100) NOT NULL,
+//          `user_id` varchar(100) NOT NULL,
+//          `create_time` datetime DEFAULT NULL,
+//          `update_time` datetime DEFAULT NULL,
+//          `disburse_timestamp` bigint(20) DEFAULT NULL,
+//          `create_timestamp` bigint(20) DEFAULT NULL,
+//          `update_timestamp` bigint(20) DEFAULT NULL
+//        PRIMARY KEY (`id`),
+//        KEY `idx_user_id` (`user_id`),
+//        KEY `idx_create_timestamp` (`create_timestamp`),
+//        KEY `idx_disburse_timestamp` (`disburse_timestamp`),
+//        KEY `idx_update_timestamp` (`update_timestamp`)
+//        ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 ROW_FORMAT = DYNAMIC COMMENT = '订单表'
+
+
+
+//        1.原始sql
+//        "SELECT `id`,`disburse_time` FROM `order` WHERE disburse_timestamp < #{tagTime} order by `disburse_timestamp` desc limit #{limitNum} offset #{offsetNum}"
+//        性能不足点分析：
+//          1,没有使用覆盖索引,导致回表： select 的列 `disburse_time`, id` 和 order by 的`disburse_timestamp` 没在一个索引，不能使用覆盖索引，select中的disburse_time改为`disburse_timestamp`,从而使用覆盖索引
+//          2.如果数据很多：
+//              offset过大影响性能的原因是。offset是先查出where的结果(多次通过主键索引访问数据块的I/O操作，导致了大量的I/O)再offset，（注意，只有InnoDB有这个问题，而MYISAM索引结构与InnoDB不同，二级索引都是直接指向数据块的，因此没有此问题 ）。
+//              offset解决方案: 因此我们先查出偏移后的主键，再根据主键索引查询数据块的所有内容(此时只有limitNum的数据I/O)即可优化。
+//        sql优化：
+//        查部分数据： SELECT `id`,`disburse_timestamp` FROM `order` WHERE disburse_timestamp >= #{lastDisburseTimestamp} and disburse_timestamp < #{tagTimeStamp} order by `disburse_timestamp` limit #{limitNum}
+//        查所有数据:  SELECT * from `order` where id in (select id from `order` where disburse_timestamp < #{tagTime} order by `disburse_timestamp` limit offsetNum,limitNum )
+
+
     }
 
     // named for thread with ThreadFactory
