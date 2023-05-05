@@ -1,61 +1,48 @@
 package com.wjx.backtrack;
 
-import com.wjx.util.JsonUtil;
-
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 全排列问题: 给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
- * https://leetcode.com/problems/permutations/
+ * 全排列问题： 给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
+ *
+ * 输入：nums = [1,2,3]
+ * 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
  *
  * @Author wangjiaxing
- * @Date 2023/4/5
+ * @Date 2023/4/28
  */
-public class FullPermutation {
-
-    List<List<Integer>> res = new LinkedList<>();
-
-    public static void main(String[] args) {
-        System.out.println(JsonUtil.toString(new FullPermutation().permute(new int[]{1, 2, 3})));
-    }
+public class FullPermutation implements Backtrack_solutions{
 
 
-    /* 主函数，输入一组不重复的数字，返回它们的全排列 */
-    List<List<Integer>> permute(int[] nums) {
-        // 记录「路径」
-        LinkedList<Integer> track = new LinkedList<>();
-        // 「路径」中的元素会被标记为 true，避免重复使用
-        boolean[] used = new boolean[nums.length];
+    class Solution {
+        List<List<Integer>> result = new ArrayList<>();
 
-        backtrack(nums, track, used);
-        return res;
-    }
-
-    // 路径：记录在 track 中
-    // 选择列表：nums 中不存在于 track 的那些元素（used[i] 为 false）
-    // 结束条件：nums 中的元素全都在 track 中出现
-    void backtrack(int[] nums, LinkedList<Integer> track, boolean[] used) {
-        // 触发结束条件
-        if (track.size() == nums.length) {
-            res.add(new LinkedList(track));
-            return;
-        }
-
-        for (int i = 0; i < nums.length; i++) {
-            // 排除不合法的选择
-            if (used[i]) {
-                // nums[i] 已经在 track 中，跳过
-                continue;
+        public List<List<Integer>> permute(int[] nums) {
+            List<Integer> selections = new ArrayList<>();
+            for (int num : nums) {
+                selections.add(num);
             }
-            // 做选择
-            track.add(nums[i]);
-            used[i] = true;
-            // 进入下一层决策树
-            backtrack(nums, track, used);
-            // 取消选择
-            track.removeLast();
-            used[i] = false;
+            backtrack(new ArrayList<>(), selections);
+            return result;
+
         }
+
+        private void backtrack(ArrayList<Integer> selected, List<Integer> selections) {
+            if(selections.isEmpty()) {
+                List<Integer> clone = new ArrayList<>(selected);
+                result.add(clone);
+            }
+            Integer[] selectionArrs = selections.toArray(new Integer[0]);
+            for (Integer n : selectionArrs) {
+                selected.add(n);
+                selections.remove(n);
+                backtrack(selected,selections);
+                selections.add(n);
+                selected.remove(n);
+            }
+        }
+
     }
+
 }
