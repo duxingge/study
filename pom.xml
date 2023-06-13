@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wjx</groupId>
-    <artifactId>algorithm</artifactId>
+    <artifactId>study</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>algorithm</name>
+    <name>study</name>
     <packaging>pom</packaging>
     <description>Demo project for Spring Boot</description>
     <properties>
