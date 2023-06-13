@@ -7,7 +7,7 @@ package com.wjx.concurrency.producerAndConsumer;
  * wait/notifyAll {@link WaitAndNotifyStorage}
  * ReentrantLock await/signalAll {@link ReentrantLockStorage}
  * BlockingQueue put/take {@link BlockingStorage} 本质也是基于ReentrantLock await/signalAll
- * Semaphore 信号量方式实现 比较麻烦。{@link SemaphoreStorage }管程是信号量的封装，所以基于管程mesa模型的ReentrantLock/BlockingQueue更简单。
+ * Semaphore 信号量方式实现 比较麻烦。{@link SemaphoreStorage } 管程是信号量的封装，所以基于管程mesa模型的ReentrantLock/BlockingQueue比Semaphore更简单。
  *
  * 注1: {@link java.util.concurrent.locks.AbstractQueuedSynchronizer}是信号量思想
  * 注2: {@link java.util.concurrent.locks.ReentrantLock} ReentrantLock是基于AQS结合condition实现的，属于管程思想

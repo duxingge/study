@@ -20,7 +20,7 @@ import com.wjx.binarytree.kit.TreeNode;
  * @Author wangjiaxing
  * @Date 2023/3/1
  */
-public class BinaryTreeSolution {
+public class BinaryTree_solution {
 
     /**
      * 遍历：
