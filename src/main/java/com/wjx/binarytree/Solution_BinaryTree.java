@@ -8,7 +8,7 @@ import com.wjx.binarytree.kit.TreeNode;
  *  第二类是通过分解问题计算出答案，
  *  这两类思路分别对应着 回溯算法核心框架 和 动态规划核心框架。
  *
- *  for example {@link Solution_MaxDepth}
+ *  for example {@link MaxDepth}
  *
  *  综上，遇到一道二叉树的题目时的通用思考过程是：
  * 1、是否可以通过遍历一遍二叉树得到答案？如果可以，用一个 traverse 函数配合外部变量来实现。
@@ -20,7 +20,7 @@ import com.wjx.binarytree.kit.TreeNode;
  * @Author wangjiaxing
  * @Date 2023/3/1
  */
-public class BinaryTree_solution {
+public class Solution_BinaryTree {
 
     /**
      * 遍历：

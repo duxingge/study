@@ -28,7 +28,7 @@ package com.wjx.dp;
  * @Author wangjiaxing
  * @Date 2023/3/1
  */
-public class SolutionDp {
+public class Solution_Dp {
 
 
 }

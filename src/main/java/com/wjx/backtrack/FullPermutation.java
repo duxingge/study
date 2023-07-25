@@ -1,6 +1,8 @@
 package com.wjx.backtrack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,40 +11,42 @@ import java.util.List;
  * 输入：nums = [1,2,3]
  * 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
  *
+ * https://leetcode.cn/problems/permutations/
  * @Author wangjiaxing
  * @Date 2023/4/28
  */
 public class FullPermutation implements Backtrack_solutions{
 
-
     class Solution {
-        List<List<Integer>> result = new ArrayList<>();
+
+        List<List<Integer>> res = new ArrayList<>();
+        LinkedList<Integer> trace = new LinkedList();
+        boolean[] used;
 
         public List<List<Integer>> permute(int[] nums) {
-            List<Integer> selections = new ArrayList<>();
-            for (int num : nums) {
-                selections.add(num);
-            }
-            backtrack(new ArrayList<>(), selections);
-            return result;
-
+            used = new boolean[nums.length];
+            Arrays.fill(used,false);
+            backtrace(nums);
+            return res;
         }
 
-        private void backtrack(ArrayList<Integer> selected, List<Integer> selections) {
-            if(selections.isEmpty()) {
-                List<Integer> clone = new ArrayList<>(selected);
-                result.add(clone);
+        private void backtrace(int[] nums) {
+            if(trace.size()==nums.length) {
+                res.add(new LinkedList<>(trace));
+                return;
             }
-            Integer[] selectionArrs = selections.toArray(new Integer[0]);
-            for (Integer n : selectionArrs) {
-                selected.add(n);
-                selections.remove(n);
-                backtrack(selected,selections);
-                selections.add(n);
-                selected.remove(n);
+
+            for (int i = 0; i < nums.length; i++) {
+                if(used[i]) {
+                    continue;
+                }
+                used[i] = true;
+                trace.addLast(nums[i]);
+                backtrace(nums);
+                trace.removeLast();
+                used[i] = false;
             }
         }
-
     }
 
 }

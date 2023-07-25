@@ -1,16 +1,35 @@
 package com.wjx;
 
 
+import java.util.*;
+
 public class Solution {
-    private static int _1m = 1024*1024;
-    public static void main(String[] args) throws IllegalAccessException {
-        {
-            byte[] holders = new byte[64 * _1m];
-            System.out.println("");
+    List<List<Integer>> res = new ArrayList<>();
+    LinkedList<Integer> traceList = new LinkedList<>();
+
+
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        int[] selections = new int[9];
+        for (int i = 1; i < 10; i++) {
+            selections[i-1] = i;
         }
-        int i = 1;
-        System.gc();
-        System.out.println("");
+        backTrace(0, selections, k , n);
+        return res;
     }
 
+    private void backTrace(int start, int[] selections, int k, int n) {
+        if(k==0 && n==0) {
+            res.add(new LinkedList<>(traceList));
+        }
+        if (n < 0 || k < 0 ) {
+            return;
+        }
+
+        for (int i = start ; i < selections.length; i++) {
+            traceList.addLast(selections[i]);
+            backTrace(i+1 ,selections,k-1, n - selections[i]);
+            traceList.removeLast();
+        }
+    }
 }
+

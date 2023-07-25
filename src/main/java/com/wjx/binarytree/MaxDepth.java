@@ -27,7 +27,7 @@ import com.wjx.binarytree.kit.TreeNode;
 
 
 
-class Solution_MaxDepth {
+class MaxDepth {
     int deep = 0;
     int maxDeep = 0;
     //遍历解法

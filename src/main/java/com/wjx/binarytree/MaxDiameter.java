@@ -23,7 +23,7 @@ import com.wjx.binarytree.kit.TreeNode;
  * @Author wangjiaxing
  * @Date 2023/3/1
  */
-public class Solution_MaxDiameter {
+public class MaxDiameter {
 
     int maxDiameter = 0;
 
