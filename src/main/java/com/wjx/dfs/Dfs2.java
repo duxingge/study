@@ -34,6 +34,16 @@ public class Dfs2 {
         return max;
     }
 
+    /**
+     * 拥有i,j的最大岛屿路径 =
+     *      i，j=0, 则结果为0
+     *      i,j=1,  则结果= 1+ 将i,j设为0后的 Max{包含上/下/左/右}岛屿
+     * 注意：每过一个i,j节点，就将节点值设为0,表示该节点相关的岛屿已遍历过了。
+     * @param grid
+     * @param i
+     * @param j
+     * @return
+     */
     int maxAreaWithoutTag(int[][] grid, int i, int j) {
         if (grid[i][j] == 0) {
             return 0;

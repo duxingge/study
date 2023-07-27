@@ -8,7 +8,7 @@ package com.wjx.backtrack;
  * 2、选择列表：也就是你当前可以做的选择。
  *
  * 3、结束条件：也就是到达决策树底层，无法再做选择的条件。
- * {@link FullPermutation}
+ * example {@link FullPermutation}
  * @Author wangjiaxing
  * @Date 2023/4/5
  */

@@ -88,5 +88,6 @@ public class Collection {
         //6. 数组转集合
         List<Integer> nums1 = Arrays.stream(integers).collect(Collectors.toList());
         List<Integer> nums2 = Arrays.stream(ints).boxed().collect(Collectors.toList());
+
     }
 }
