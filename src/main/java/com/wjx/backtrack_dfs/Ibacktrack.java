@@ -1,4 +1,4 @@
-package com.wjx.backtrack;
+package com.wjx.backtrack_dfs;
 
 /**
  * 解决一个回溯问题，实际上就是一个决策树的遍历过程，站在回溯树的一个节点上，你只需要思考 3 个问题：

@@ -1,4 +1,4 @@
-package com.wjx.backtrack;
+package com.wjx.backtrack_dfs;
 
 import com.google.common.collect.Lists;
 

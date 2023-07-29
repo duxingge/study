@@ -1,4 +1,4 @@
-package com.wjx.dfs;
+package com.wjx.backtrack_dfs.dfs;
 
 /**
  * 给你一个大小为 m x n 的二进制矩阵 grid 。

@@ -3,33 +3,50 @@ package com.wjx;
 
 import java.util.*;
 
-public class Solution {
-    List<List<Integer>> res = new ArrayList<>();
-    LinkedList<Integer> traceList = new LinkedList<>();
-
-
-    public List<List<Integer>> combinationSum3(int k, int n) {
-        int[] selections = new int[9];
-        for (int i = 1; i < 10; i++) {
-            selections[i-1] = i;
+class Solution {
+    int max = 0;
+    List<Integer>[] paths;
+    Map<Integer,Integer> nMaxReach = new HashMap();
+    int[] times = null;
+    public int minimumTime(int n, int[][] relations, int[] time) {
+        paths = new List[time.length+1];
+        for (int i = 0; i < paths.length; i++) {
+            paths[i] = new ArrayList<>();
         }
-        backTrace(0, selections, k , n);
-        return res;
+        times = time;
+        for (int[] relation : relations) {
+            paths[relation[1]].add(relation[0]);
+        }
+        for(int i=0 ; i< time.length; i++ ) {
+            max = Math.max(max, time[i] + dp(i+1));
+        }
+        return max;
     }
 
-    private void backTrace(int start, int[] selections, int k, int n) {
-        if(k==0 && n==0) {
-            res.add(new LinkedList<>(traceList));
-        }
-        if (n < 0 || k < 0 ) {
-            return;
+
+    int dp(Integer classNum) {
+        Integer cache = nMaxReach.get(classNum);
+        if(cache !=null) {
+            return cache;
         }
 
-        for (int i = start ; i < selections.length; i++) {
-            traceList.addLast(selections[i]);
-            backTrace(i+1 ,selections,k-1, n - selections[i]);
-            traceList.removeLast();
+        int reachMax = 0;
+        if(!paths[classNum].isEmpty()) {
+            for(Integer p : paths[classNum]) {
+                reachMax = Math.max(reachMax,times[p-1] + dp(p));
+            }
         }
+        nMaxReach.put(classNum, reachMax);
+        return reachMax;
+    }
+
+    public static void main(String[] args) {
+        final int[][] ints = new int[2][2];
+        ints[0][0] = 1;
+        ints[0][1] = 3;
+        ints[1][0] = 2;
+        ints[1][1] = 3;
+        System.out.println(new Solution().minimumTime(3, ints, new int[]{3, 2, 5}));
     }
 }
 

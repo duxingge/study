@@ -1,4 +1,4 @@
-package com.wjx.backtrack;
+package com.wjx.backtrack_dfs;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 字串问题都可以使用滑动窗口
+ * 字串问题都可以使用滑动窗口+双指针解决
  * @Author wangjiaxing
  * @Date 2022/5/9
  */

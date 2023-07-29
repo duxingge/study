@@ -34,6 +34,5 @@ public class Solution_BinaryTree {
         //node节点的中序位置
         traverse(node.right);
         //node节点的后序位置，代表离开node节点,后续位置可以获得左右子树的信息
-
     }
 }
