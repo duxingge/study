@@ -1,5 +1,6 @@
 package com.wjx.java.collection;
 
+
 /**
  * 1. {@link java.util.concurrent.ConcurrentHashMap} 线程安全的HashMap
  *  JDK1.7之前： Segment+HashEntry数组+链表
@@ -24,6 +25,21 @@ package com.wjx.java.collection;
  *   Java8 中的 ConcurrentHashMap 使用的 Synchronized 锁 + CAS 的机制。
  *      结构也由 Java7 中的 Segment 数组 + HashEntry 数组 + 链表 进化成了 Node 数组 + 链表 / 红黑树，
  *      Node 是类似于一个 HashEntry 的结构。它的冲突再达到一定大小时会转化成红黑树，在冲突小于一定数量时又退回链表。
+ *  2. {@link java.util.concurrent.BlockingDeque}
+ *      2.1 {@link java.util.concurrent.ArrayBlockingQueue} 线程安全的有界的阻塞队列
+ *          2.1.1 ArrayBlockingQueue 内部维护一个定长的数组用于存储元素,支持阻塞(put,take)和非阻塞存取(offer/poll)。
+ *          2.1.2 通过使用 ReentrantLock 锁对象对读写操作进行同步，即通过锁机制来实现线程安全，支持公平锁和默认非公平锁。
+ *          2.1.3 通过 Condition 实现线程间的等待和唤醒操作(await()和signal())。
+ *      2.2 {@link java.util.concurrent.LinkedBlockingQueue} 线程安全的无界的阻塞链表队列
+ *          2.2.1 基于链表实现 + 无界
+ *          2.2.2 LinkedBlockingQueue中的锁是分离的，即生产用的是putLock，消费是takeLock，这样可以防止生产者和消费者线程之间的锁争夺
+ *          2.2.3
+ *  3. {@link java.util.concurrent.ConcurrentLinkedQueue}  线程安全的无界非阻塞链表队列
+ *
+ *
+ *
+ *
+ *
  * @Author wangjiaxing
  * @Date 2023/2/15
  */

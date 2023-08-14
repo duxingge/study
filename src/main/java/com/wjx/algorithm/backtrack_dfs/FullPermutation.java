@@ -15,7 +15,7 @@ import java.util.List;
  * @Author wangjiaxing
  * @Date 2023/4/28
  */
-public class FullPermutation implements Backtrack_solutions{
+public class FullPermutation implements Solutions_Backtrack {
 
     class Solution {
 

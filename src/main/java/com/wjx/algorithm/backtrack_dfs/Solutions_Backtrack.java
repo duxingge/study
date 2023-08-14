@@ -33,7 +33,7 @@ import java.util.List;
  * @Author wangjiaxing
  * @Date 2023/4/28
  */
-public interface Backtrack_solutions {
+public interface Solutions_Backtrack {
 
 
     /**
