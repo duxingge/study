@@ -71,7 +71,7 @@
     4. 范例: 
        > 1. mount -t iso9660 /dev/sr0 /mnt/cdrom 将设备/dev/sr0挂载到了/mnt/cdrom上面
        > 2. mount 查看所有挂载
-       > 3. u\mount /dev/sr0 卸载挂载 （有的外载弹出前必须卸载）
+       > 3. mount /dev/sr0 卸载挂载 （有的外载弹出前必须卸载）
 
 > service network restart 修改完网络配置后记得重启网卡
     
