@@ -1,4 +1,64 @@
 #1. ACL权限
+
+```shell
+# 查看是否支持ACL权限
+dumpe2fs -h /dev/sda3
+
+# 本次开启ACL -o 挂载选项
+mount -o remount,acl /
+
+# 永久开启分区acl
+文件/etc/fstab defaults改为defalts,acl
+
+setfacl -m u:wjx:rw /project/
+getfacl /project/
+#删除用户wjx在/project/的acl权限
+setfacl -x u:wjx /project/
+#删除/project/上所有的acl权限
+setfacl -b /project/
+
+# 递归设置/project/目录下所有文件对wjx的acl权限为rw
+setfacl -m u:wjx:rw -R /project/
+
+# 设置/project/对wjx的默认acl权限
+setfacl -m d:u:wjx:rw /project/
+
+# 设置目录最大的acl权限
+setfacl -m m:rx /project/
+
+
+SetUID
+SetGID
+
+#设置粘着位
+chmod 1755 目录名
+## 或者
+chmod o+t 目录名
+```
+# 文件加不可修改锁
+chattr +i f1.txt
+#文件释放不可修改锁
+chattr -i f1.txt
+
+#目录加不可修改锁
+chattr +i /project/
+#目录释放不可修改锁
+chattr -i /project/
+
+# i换成a变为可追加锁，如文件/目录加可追加锁
+chattr +a f1.txt
+
+#sudo 将root用户的命令授权给普通用户执行
+#查看当前用户所有支持的sudo命令
+sudo -l
+
+# /etc/sudoers 授权的sudo命令配置表
+
+
+
+
+
+------------
 ## 一. 简介
 ###1.作用
     主要解决UGO(user+group+other)权限不够用的情况

@@ -1,5 +1,55 @@
 # 用户和用户组
 
+```shell
+
+/etc/passwd
+/etc/shadow
+/etc/group
+/etc/gshadow
+/etc/skel
+
+# 增加用户
+useradd 用户名
+# 设置用户密码
+passwd 用户名 / passwd
+# 重置用户附加组为xxx
+usermode -G  xxx 用户名
+# 将用户最后一次修改密码时间戳改为0(用户一登陆就必须更改密码)
+chage -d 0 wjw
+
+# 删除用户
+userdel -r 用户名
+
+# 切换为用户xx
+su - xx
+
+# 添加组
+groupadd xxx
+
+@ 删除组
+groupdel xxx
+
+# 将wjx加入到wjw组
+gpasswd -a wjx wjw
+# 将wjx移出到wjw组      
+gpasswd -d wjx wjw      
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------
 ## 相关文件简介
 对安全要求越高的服务器越需要严格的用户权限制度和严格的规范
 
@@ -173,7 +223,7 @@ GID_MAX       60000
         -a 用户名
         -d 用户名
     例子:
-        gpasswd -a wjx wjw      # 将wjx加入到wjx组
+        gpasswd -a wjx wjw      # 将wjx加入到wjw组
 
 
 

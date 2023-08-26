@@ -1,5 +1,23 @@
 # Linux软件包
 
+## 总结
+rpm包 源码包
+
+rpm -ivh 包全名
+rpm -q 包名
+rpm -qa
+rpm -qi 包名
+rpm -ql
+
+yum list
+yum -y intsall 包名
+
+
+
+
+
+
+-----------------
 ####分类
     1. 源码包： 
         1. 缺点：
@@ -113,7 +131,7 @@ cpio 选项  [文件/设备]
     /etc/yum.repos.d 下.repo都是源，默认Base生效。离线下可以使CentOS-Media.repo(光盘)生效
 
 #### yum查询源下的所有包
-    yum list
+yum list
 
 #### yum包安装
 yum -y intsall 包名

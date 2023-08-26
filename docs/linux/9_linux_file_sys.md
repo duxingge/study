@@ -1,5 +1,44 @@
 #文件系统管理
 
+```shell
+# 查看分区大小
+df -h
+
+# 查看目录磁盘占用
+du -sh /project/
+
+# 将设备/dev/sr0挂载到/mnt/cdrom
+mount /dev/sr0 /mnt/cdrom
+
+# 查看挂载
+mount
+
+# 将/etc/fstab配置重新挂载
+mount -a
+
+# 卸载挂载/dev/sr0
+umount /dev/sr0  
+
+# 查看分区
+fdisk -l
+
+
+##新加一块磁盘，使用fdisk 进行磁盘分区，1个主分区2G，一个逻辑分区8G， 并完成挂载##
+#1. 开启磁盘/dev/sdb的分区程序 fdisk /dev/sdb  
+#...
+#2. 重新读取分区信息  partprobe 
+#3. 格式化分区       mkfs -t ext4 /dev/sdb1
+#4. 挂载分区         mount /dev/sdb1 /disk1
+
+
+```
+
+
+
+
+
+
+----------
 ## 一 文件系统常用命令
 
 ### 1. 查看分区大小 df
@@ -80,11 +119,11 @@ umount /dev/sdb1
 #### 5.2 进行分区 fdisk 磁盘
    
     例子: 
-         1. fdisk /dev/sdb  开启磁盘/dev/sdb的分区程序
+         1. 开启磁盘/dev/sdb的分区程序 fdisk /dev/sdb  
          ...
-         2. partprobe 重新读取分区信息
-         3. 格式化分区 
-         4. 挂载分区
+         2. 重新读取分区信息  partprobe 
+         3. 格式化分区       mkfs -t ext4 /dev/sdb1
+         4. 挂载分区         mount /dev/sdb1 /disk1
          
    注意1 磁盘/dev/sdb后面没加分区号
    注意2 分区完成之后使用命令 partprobe 来重新读取分区信息(因为有时分区被使用，write命令可能失败)
