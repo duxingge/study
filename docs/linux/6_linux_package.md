@@ -8,6 +8,7 @@ rpm -q 包名
 rpm -qa
 rpm -qi 包名
 rpm -ql
+rpm -e 包名
 
 yum list
 yum -y intsall 包名

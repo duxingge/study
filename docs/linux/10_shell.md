@@ -191,9 +191,261 @@ source 配置文件
 ```
 
 #### 常见的配置文件
-
+下面的文件覆盖上面的文件: 
       /etc/profile
       /etc/profile.d/*.sh
       ~/.bash_profile
       ~/.bashrc
       /etc/bashrc
+
+#### 配置文件执行流程
+
+![img.png](../pic/profile_seq.png)
+
+#### ~/.bash_logout 注销时生效的环境变量配置文件
+
+#### ~/bash_history 历史操作记录文件
+
+#### /etc/issue 本地终端欢迎信息
+
+#### /etc/issue.net 远程终端欢迎信息 # 需要在/etc/ssh/sshd_config中加入 Banner /etc/issue.net才能生效
+
+
+# 四 正则表达式
+
+#### 正则 VS 通配符
+1. 正则是匹配文件中符合条件的字符串，为包含匹配， 如 grep , sed, awk
+2. 匹配符是匹配符合条件的文件名，如ls,cp,find 他们不支持正则
+
+
+
+
+
+-----------
+1.正则表达式格式
+![img.png](../pic/refular.png)
+
+2. cut命令 
+   
+提取目标第几列，一般与grep配合
+   
+        cut [选项] 文件名
+            -f 列号
+            -d 分隔符 默认为制表符
+        例子: cut -d ":" -f 5 /etc/passwd
+        cut对于非固定数量空格间隔的支持不好，此时需要cut
+
+
+3. printf命令 - Linux和awk都支持
+
+        printf '输出类型格式' 输出内容
+            %ns     输出字符串, n代表输出几个字符串
+            %ni     输出整数, n代表输出几个整数
+            %m.nf   输出浮点数, 代表整数部位m位，小数部位n位
+
+```shell
+# 例子1： 输入的参数大于%s指定的个数时，会循环匹配输出格式
+[root@localhost ~]# printf %s 1 2 3 4 5 6
+123456
+[root@localhost ~]# printf '%s %s' 1 2 3 4 5 6
+1 23 45 6
+[root@localhost ~]# printf '%s %s\n' 1 2 3 4 5 6
+1 2
+3 4
+5 6
+# 例子2： 打印文件内容(注意因为f1.sh内容大于%s的个数1，所以会循环匹配%s导致没有空格输出)
+[wjx@localhost shell]$ cat f1.sh
+#!/bin/bash
+
+echo sss
+echo "command" $0
+echo "param1 $1"
+echo "all param " $@
+[wjx@localhost shell]$ printf '%s' $(cat f1.sh)
+#!/bin/bashechosssecho"command"$0echo"param1$1"echo"allparam"$@
+```
+> print 会换行，但Linux不支持
+
+4. awk命令
+
+5. sed 命令
+
+6. 字符处理命令
+
+    1. sort
+            
+            sort [选项] 文件名
+                -n 以数值型进行排序, 默认以字符串排序
+                -r 反向排序
+                -t 指定分隔符，默认为制表键
+                -k n[,m] 按指定第n到m个字段排序
+    
+```shell
+#以字符排序
+sort /etc/passw
+#以第3列到第3列按数字排序
+sort -t ':' -n -k 3,3 /etc/passwd
+```
+    
+    2. wc
+        
+            wc [选项] 文件名
+                -l 行
+                -w 单词
+                -c 字节数
+
+## 五 条件判断
+
+test表达式有两种格式
+```shell
+# 判断/etc/passwd是否存在
+test -e /etc/passwd
+#或者
+[ -e /etc/passwd ]  # 更常用,注意[]前后必须有空格
+```
+
+> [ -e /etc/passwd ] && echo yes || echo no
+
+#### 1. 文件类型判断
+```shell
+# 判断/etc/passwd是否存在
+[ -e /etc/passwd]
+# 判断/etc/passwd是否存在 && 是否文件
+[ -f /etc/passwd] 
+# 判断/etc/passwd是否存在 && 是否目录
+[ -d /etc/passwd] 
+```
+#### 2. 文件权限判断
+
+```shell
+# 判断文件存在 && 是否具有读权限（注意，判断的是所有的UGO权限，而不是当前用户是否具有）
+[ -r /etc/passwd ] 
+# 判断文件存在 && 是否具有写权限
+[ -w /etc/passwd ]
+# 判断文件存在 && 是否具有执行权限
+[ -x /etc/passwd ] 
+```
+
+#### 文件比较
+
+```shell
+# 判断/etc/passwd修改时间是否比/etc/shadow文件新
+[ /etc/passwd -nt /etc/shadow ]
+
+# 判断/etc/passwd修改时间是否比/etc/shadow文件旧
+[ /etc/passwd -ot /etc/shadow ]
+
+# 判断/etc/passwd与/etc/shadow的INode节点是否一致(即判断是否硬链接)
+[ /etc/passwd -eq /etc/shadow ]
+```
+#### 整数比较
+```shell
+## 整数aa与bb是否相等
+[ $aa -eq $bb ]
+# -lt -gt -ne -ge -le
+```
+
+#### 字符串比较
+
+```shell
+# 字符串是否为空 (空返回真)
+[ -z $aa ]
+# 字符串是否非空 (非空返回真) 
+[ -n $aa ] 
+# 字符串是否相等  ==
+[ "aa" == "$bb" ]
+# 字符串是否不相等  !=
+[ "aa" != "$bb" ]
+```
+
+#### 多重条件判断
+
+```shell
+# 逻辑与 -a
+[ "aa" == "bb" -a 3 -gt 1 ] && echo yes || echo no
+# 逻辑或 -o
+[ "aa" == "bb" -o 3 -gt 1 ] && echo yes || echo no
+# 逻辑非 ! ,注意!之后必须有空格
+[ ! 3 -gt 1 ] && echo yes || echo no
+
+```
+#### if语句
+
+if [ 条件判断 ] 
+    then
+        xxxx
+    elif [ 条件判断 ]
+        xxxx
+    else
+        xxxx
+fi
+
+
+#### case 语句
+
+case $变量 in 
+    "值1")
+        xxxx
+        ;;
+    "值2")
+        xxxx
+        ;;
+    *)
+        xxxx
+esac
+
+```shell
+case $cho in
+	"1")
+		echo "here is shanghai"
+		;;
+	"2")
+		echo "here is beijing"
+		;;
+	"3")
+		echo "here is xian"
+		;;
+	*)
+		echo "error input!. only 1/2/3"
+esac
+```
+
+#### for语句
+
+1. 语法1
+
+```shell
+for 变量1 in 值1,值2,值3
+  do
+     xxxx
+  done
+```
+
+2. 语法2
+
+```shell
+for (( 初始值;循环条件;变量变化 ))
+  do
+      xxxxx
+  done
+```
+
+#### while语句
+
+```shell
+while   [ 条件判断 ]
+    do
+      xxxx
+    done
+```
+
+#### until语句
+
+符合条件判断时终止
+
+```shell
+until   [ 条件判断 ]
+    do
+      xxxx
+    done
+```

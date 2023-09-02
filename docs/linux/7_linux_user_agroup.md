@@ -34,6 +34,8 @@ gpasswd -a wjx wjw
 # 将wjx移出到wjw组      
 gpasswd -d wjx wjw      
 
+# 查看当前登陆用户
+w
 ```
 
 
@@ -198,6 +200,17 @@ GID_MAX       60000
     例子:
     su - root : 切换为root用户
     su - root -c "useradd user3"  : 不切换用户身份，但以root执行一次命令
+
+#### 查看当前登陆用户
+```shell
+[root@localhost ~]# w
+10:06:48 up  2:14,  3 users,  load average: 0.00, 0.00, 0.00
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+root     tty1                      07:53    7:18   0.06s  0.06s -bash
+wjx      pts/0    192.168.66.193   08:08    1:37m  0.04s  0.05s sshd: wjx [priv]
+root     pts/2    192.168.66.193   09:59    0.00s  0.02s  0.01s w
+
+```
 
 #### 添加用户组
     
