@@ -270,6 +270,12 @@ VERSION="7 (AltArch)"
 #例子2： 每天0点备份
 0 0 */1 * * /root/sh/bak.sh
 
+[root@localhost etc]# crontab -e
+[root@localhost etc]# crontab -l
+* * * * * echo 1111 >> /root/testcode/f1.txt
+[root@localhost etc]# cat /root/testcode/f1.txt
+1111
+1111
 ```
 
-注意： coretab 中 %有特殊含义，对应的shell脚本中的%前要加\进行转义
+注意： crontab 中 %有特殊含义，对应的shell脚本中的%前要加\进行转义
