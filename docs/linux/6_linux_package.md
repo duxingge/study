@@ -2,7 +2,7 @@
 
 ## 总结
 rpm包 源码包
-
+```shell
 rpm -ivh 包全名
 rpm -q 包名
 rpm -qa
@@ -12,6 +12,8 @@ rpm -e 包名
 
 yum list
 yum -y intsall 包名
+
+```
 
 
 

@@ -41,7 +41,7 @@ shell主要的语法类型有两种：
     4.1 输出重定向
         
         命令 > 文件    以覆盖的方式，将正确的输出输出到指定的文件和设备中。
-        命令 >> 文件   以覆盖的方式，将正确的输出输出到指定的文件和设备中。
+        命令 >> 文件   以追加的方式，将正确的输出输出到指定的文件和设备中。
    
         命令 2> 文件   以覆盖的方式，将错误的输出输出到指定的文件和设备中。
         命令 2>> 文件  以追加的方式，将错误的输出输出到指定的文件和设备中。
@@ -144,24 +144,37 @@ echo $sex
 
 ### 数值运算与运算符
 
-#### declare命令 了解即可
+[comment]: <> (#### declare命令 了解即可)
 
-       declare [+-][选项] 变量名
-         -： 给变量设置类型属性
-         +： 取消变量类型属性
-         -i: 将变量设置成整数类型
-         -x: 将变量指定为环境变量
-         -p: 显示变量类型
+[comment]: <> (       declare [+-][选项] 变量名)
 
-```shell
-wangjiaxing@MacBook-Pro ~ % aa=111
-wangjiaxing@MacBook-Pro ~ % bb=222
-wangjiaxing@MacBook-Pro ~ % echo $aa+$bb
-111+222
-wangjiaxing@MacBook-Pro ~ % declare -i cc=$aa+$bb
-wangjiaxing@MacBook-Pro ~ % echo $cc
-333
-```
+[comment]: <> (         -： 给变量设置类型属性)
+
+[comment]: <> (         +： 取消变量类型属性)
+
+[comment]: <> (         -i: 将变量设置成整数类型)
+
+[comment]: <> (         -x: 将变量指定为环境变量)
+
+[comment]: <> (         -p: 显示变量类型)
+
+[comment]: <> (```shell)
+
+[comment]: <> (wangjiaxing@MacBook-Pro ~ % aa=111)
+
+[comment]: <> (wangjiaxing@MacBook-Pro ~ % bb=222)
+
+[comment]: <> (wangjiaxing@MacBook-Pro ~ % echo $aa+$bb)
+
+[comment]: <> (111+222)
+
+[comment]: <> (wangjiaxing@MacBook-Pro ~ % declare -i cc=$aa+$bb)
+
+[comment]: <> (wangjiaxing@MacBook-Pro ~ % echo $cc)
+
+[comment]: <> (333)
+
+[comment]: <> (```)
 
 #### $((运算式))     常用
 
@@ -214,7 +227,7 @@ source 配置文件
 # 四 正则表达式
 
 #### 正则 VS 通配符
-1. 正则是匹配文件中符合条件的字符串，为包含匹配， 如 grep , sed, awk
+1. 正则是匹配文件中符合条件的字符串，是包含匹配， 如 grep , sed, awk
 2. 匹配符是匹配符合条件的文件名，如ls,cp,find 他们不支持正则
 
 

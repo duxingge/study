@@ -12,6 +12,10 @@
 useradd 用户名
 # 设置用户密码
 passwd 用户名 / passwd
+# 锁定用户
+passwd -l wjx
+# 解锁用户
+passwd -u wjx
 # 重置用户附加组为xxx
 usermode -G  xxx 用户名
 # 将用户最后一次修改密码时间戳改为0(用户一登陆就必须更改密码)

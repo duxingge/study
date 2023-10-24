@@ -13,7 +13,7 @@
     - 写意向锁IX
 - 间隙锁GAP
 
-> 临键锁 next-key Lock : 主要在当前读场景解决幻读， 是记录锁与间隙锁的组合，即包含索引记录，也包含索引区间
+> 临键锁 next-key Lock : 主要在当前读场景解决幻读(快照读的幻读问题是由MVCC来解决的)， 是记录锁与间隙锁的组合，即包含索引记录，也包含索引区间
 
 >什么是意向锁? 
 >
@@ -69,14 +69,14 @@
 
 ### readView 一致性视图
 
-> 快照读: 简单的select, 即不包括 select ... lock in share mode, select ... for update, 可能会读到历史版本
+> 快照读-不加锁!!!: 简单的select, 即不包括 select ... lock in share mode, select ... for update, 可能会读到历史版本
 
 > 当前读: 以下语句都是当前读，总是读到最新版本，并对最新的版本进行加锁(加锁后就不能追加undo log 版本链了，除非加锁的事务commit)
-> - select ... lock in share mode
-> - select ... for update
-> - insert
-> - delete
-> - update 
+> - select ... lock in share mode       S锁
+> - select ... for update               X锁
+> - insert                              X锁
+> - delete                              X锁
+> - update                              X锁
 
 > 在RR级别下解决幻读：快照读是通过MVCC(多版本控制)和undo log来实现的，当前读是通过加记录锁和间隙锁，即临键锁来实现的
 
@@ -139,3 +139,13 @@ MVCC在RC与RR级别下的区别，在于生成ReadView的频率不同：
 范围查询: where col1 > xx and col1 < yy
         下限 = xx存在? xx  :  [xx
         上线 = yy存在? yy  :  yy]
+
+------------------------
+1. 怎么理解next-key-Lock主要在当前读场景解决幻读(快照读的幻读问题是由MVCC来解决的)?
+>情况1： 第二次读为快照读产生的幻读问题-MVCC
+![img.png](img.png)
+解析：快照读是不加任何锁的，因为快照读是读MVCC产生的快照版本，所以快照读的幻读问题由MVCC可以解决，当然也不存在阻塞问题。
+> 
+> 情况2： 第二次读为当前读产生的幻读问题-临键锁
+![img_1.png](img_1.png)
+解析: 为了避免当前读的不一致问题，当前读会加Next-Key Lock
