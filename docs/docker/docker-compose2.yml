@@ -1,0 +1,53 @@
+# docker CIG监控
+version: '3'
+
+services:
+
+  influxdb:
+    image: tutum/influxdb:latest
+    container_name: influxdb
+    restart: always
+    ports:
+      - "8086:8086"
+      - "8083:8083"
+    environment:
+      - INFLUXDB_DB=cadvisor
+      - INFLUXDB_USER=root
+      - INFLUXDB_USER_PASSWORD=root
+
+  cadvisor:
+    image: google/cadvisor:latest
+    links:
+      - influxdb: influxsrv
+    command: --storage_driver=influxdb --storage_driver_host=influxsrv:8086 --storage_driver_db=cadvisor
+    container_name: cadvisor
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+
+  grafana:
+    user: "104"
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - influxdb
+    links:
+      - influxdb: influxsrv
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - INFLUXDB_HOST=influxsrv
+      - INFLUXDB_PORT=8086
+      - INFLUXDB_NAME=cadvisor
+      - INFLUXDB_USER=root
+      - INFLUXDB_PASS=root
+    volumes:
+      - /grafana/data:/var/lib/grafana

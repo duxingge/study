@@ -80,4 +80,4 @@ REPOSITORY                      TAG       IMAGE ID       CREATED         SIZE
 [root@localhost dd]# docker rmi $(docker images -q -f "dangling=true")
 ```
         
-## 3. 构建springboot Dockerfile文件，键docker-sample模块
+## 3. 构建springboot Dockerfile文件，键hello-word模块

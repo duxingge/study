@@ -7,6 +7,7 @@
 ![img.png](stru2.png)
 ![img.png](stru3.png)
 
+![img_2.png](img_2.png)
 
 #### Docker和VMare机构比较
 vm是在原本的OS上模拟了一层硬件资源，然后再安装对应的操作系统，再运行软件

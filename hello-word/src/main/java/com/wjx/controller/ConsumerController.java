@@ -21,4 +21,8 @@ public class ConsumerController {
     public String consume(HttpServletRequest request) {
         return request.getRemoteHost() +" UID: " + UUID.randomUUID().toString();
     }
+    @GetMapping("/")
+    public String hello() {
+        return "helloWorld";
+    }
 }

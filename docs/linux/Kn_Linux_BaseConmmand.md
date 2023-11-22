@@ -75,5 +75,10 @@
 
 > service network restart 修改完网络配置后记得重启网卡
     
+### 其他常用命令
+
+1. watch -n 1 xxxx 每一秒刷新xxx的执行结果. (如 watch -n kl get pod)
+
+
 
     

@@ -7,17 +7,18 @@
           <map>
             <entry key="com.zeroturnaround.jrebel.FormatVersion" value="7.0.0" />
             <entry key="jrebelEnabled" value="true" />
+            <entry key="lastExternalPluginCheckTime" value="1699548878947" />
           </map>
         </option>
-        <option name="version" value="8" />
+        <option name="version" value="10" />
       </configuration>
     </facet>
     <facet type="web" name="Web">
       <configuration>
         <webroots />
         <sourceRoots>
-          <root url="file://$MODULE_DIR$/../docker-sample/src/main/java" />
-          <root url="file://$MODULE_DIR$/../docker-sample/src/main/resources" />
+          <root url="file://$MODULE_DIR$/../hello-word/src/main/java" />
+          <root url="file://$MODULE_DIR$/../hello-word/src/main/resources" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -26,13 +27,13 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file://$MODULE_DIR$/../docker-sample/target/classes" />
-    <output-test url="file://$MODULE_DIR$/../docker-sample/target/test-classes" />
-    <content url="file://$MODULE_DIR$/../docker-sample">
-      <sourceFolder url="file://$MODULE_DIR$/../docker-sample/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../docker-sample/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../docker-sample/src/test/java" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../docker-sample/target" />
+    <output url="file://$MODULE_DIR$/../hello-word/target/classes" />
+    <output-test url="file://$MODULE_DIR$/../hello-word/target/test-classes" />
+    <content url="file://$MODULE_DIR$/../hello-word">
+      <sourceFolder url="file://$MODULE_DIR$/../hello-word/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../hello-word/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../hello-word/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../hello-word/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
